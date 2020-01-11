@@ -15,7 +15,7 @@ namespace SimpleMarketAPI.Controllers
     public class ProductsController : ControllerBase
     {
         private static SIMPLEMARKETContext context = new SIMPLEMARKETContext();
-        private static List<Product> lstProduct = context.Products.Select(product => new Product(product.ProductId, product.ProductName, product.ProductDescription, product.ProdcutPrice)).ToList();
+        private static List<ProductEntities> lstProduct = context.Products.Select(product => new ProductEntities(product.ProductId, product.ProductName, product.ProductDescription, product.ProdcutPrice)).ToList();
         [HttpGet]
         public IActionResult getAll()
         {

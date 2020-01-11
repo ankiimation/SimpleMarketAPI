@@ -31,6 +31,8 @@ namespace SimpleMarketAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMvc().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+           
 
             //ENABLE AUTHENTICATION
             var key = Encoding.ASCII.GetBytes(UserService.KEY);

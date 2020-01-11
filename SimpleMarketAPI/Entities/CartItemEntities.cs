@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace SimpleMarketAPI.Entities
 {
-    public class CartItem
+    public class CartItemEntities
     {
         public string UserName { set; get; }
         public string ProductID { set; get; }
         public int Count { set; get; }
 
-        public CartItem(string userName, string productID, int count)
+        public CartItemEntities(string userName, string productID, int count)
         {
             UserName = userName;
             ProductID = productID;

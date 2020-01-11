@@ -26,7 +26,7 @@ namespace SimpleMarketAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=ANKIIMATION;Initial Catalog=SIMPLEMARKET;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=ANKIIMATION;Initial Catalog=SIMPLEMARKET;Integrated Security=True; MultipleActiveResultSets=true");
             }
         }
 
@@ -117,6 +117,12 @@ namespace SimpleMarketAPI.Models
                     .HasMaxLength(10)
                     .IsUnicode(false)
                     .HasDefaultValueSql("('COD')");
+
+                entity.Property(e => e.OrderStatus)
+                    .IsRequired()
+                    .HasColumnName("ORDER_STATUS")
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('ÐANG CH? XÁC NH?N')");
 
                 entity.Property(e => e.Username)
                     .IsRequired()

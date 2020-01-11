@@ -13,7 +13,7 @@ namespace SimpleMarketAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CartController : ControllerBase
+    public class CartsController : ControllerBase
     {
         private static SIMPLEMARKETContext context = new SIMPLEMARKETContext();
 
@@ -30,7 +30,7 @@ namespace SimpleMarketAPI.Controllers
         public IActionResult getAllCartItems()
         {
             string username = User.Identity.Name;
-            List<CartItem> lstCartItems = context.CartDetail.Where(item => item.Username.Equals(username)).Select(item=>new CartItem(item.Username,item.ProductId, item.CartdetailCount)).ToList();
+            List<CartItemEntities> lstCartItems = context.CartDetail.Where(item => item.Username.Equals(username)).Select(item=>new CartItemEntities(item.Username,item.ProductId, item.CartdetailCount)).ToList();
             return Ok(lstCartItems);
         }
 
@@ -55,7 +55,7 @@ namespace SimpleMarketAPI.Controllers
                 context.CartDetail.Add(cartItem);
                 context.SaveChanges();
             }
-            CartItem cartItemResult = new CartItem( cartItem.Username,cartItem.ProductId, cartItem.CartdetailCount);
+            CartItemEntities cartItemResult = new CartItemEntities( cartItem.Username,cartItem.ProductId, cartItem.CartdetailCount);
   
             return Ok(cartItemResult);
 
@@ -85,7 +85,7 @@ namespace SimpleMarketAPI.Controllers
                 context.CartDetail.Add(cartItem);
                 context.SaveChanges();
             }
-            CartItem cartItemResult = new CartItem(cartItem.Username, cartItem.ProductId, cartItem.CartdetailCount);
+            CartItemEntities cartItemResult = new CartItemEntities(cartItem.Username, cartItem.ProductId, cartItem.CartdetailCount);
 
             return Ok(cartItemResult);
 

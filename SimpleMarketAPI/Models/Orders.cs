@@ -14,6 +14,7 @@ namespace SimpleMarketAPI.Models
         public string Username { get; set; }
         public string OrderPaymethod { get; set; }
         public DateTime OrderCreatedtime { get; set; }
+        public string OrderStatus { get; set; }
 
         public virtual Users UsernameNavigation { get; set; }
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }

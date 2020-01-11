@@ -14,18 +14,18 @@ namespace SimpleMarketAPI.Services
 {
     public interface IUserService
     {
-        public User AuthUser(string username, string password);
-        public IEnumerable<User> getAll();
-        public User getUser(string username);
+        public UserEntities AuthUser(string username, string password);
+        public IEnumerable<UserEntities> getAll();
+        public UserEntities getUser(string username);
     }
     public class UserService : IUserService
     {
         public static string KEY = "skadka ifh sdfgsdkfgsgkfgskfgskaksgksg  khfhksdkf";
         static SIMPLEMARKETContext context = new SIMPLEMARKETContext();
-        static List<User> LIST_USER = (from user in context.Users select user ).Select(user=>new User(user.Username,user.Password,user.Roles)).ToList();
+        static List<UserEntities> LIST_USER = (from user in context.Users select user ).Select(user=>new UserEntities(user.Username,user.Password,user.Roles)).ToList();
 
 
-        public User AuthUser(string username, string password)
+        public UserEntities AuthUser(string username, string password)
         {
             var userTemp = LIST_USER.FirstOrDefault(user=>user.Username==username && user.Password==password); //FIND USER IN LIST USER
             if(userTemp == null) //IF NOT FOUND RETURN NULL
@@ -55,11 +55,11 @@ namespace SimpleMarketAPI.Services
 
         }
 
-        public IEnumerable<User> getAll()
+        public IEnumerable<UserEntities> getAll()
         {
             return LIST_USER;
         }
-        public User getUser(string username)
+        public UserEntities getUser(string username)
         {
                 return LIST_USER.SingleOrDefault(user=>user.Username==username).withOutPassWord();
         }
