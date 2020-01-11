@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SimpleMarketAPI.Entities;
+using SimpleMarketAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,12 +21,9 @@ namespace SimpleMarketAPI.Services
     public class UserService : IUserService
     {
         public static string KEY = "skadka ifh sdfgsdkfgsgkfgskfgskaksgksg  khfhksdkf";
-        static List<User> LIST_USER = new List<User>();
-        public UserService()
-        {
-            LIST_USER.Add(new User("lenguyenkhoa","12345","Admin"));
-            LIST_USER.Add(new User("lenguyenkhiem", "000000", "Employee"));
-        }
+        static SIMPLEMARKETContext context = new SIMPLEMARKETContext();
+        static List<User> LIST_USER = (from user in context.Users select user ).Select(user=>new User(user.Username,user.Password,user.Roles)).ToList();
+
 
         public User AuthUser(string username, string password)
         {
